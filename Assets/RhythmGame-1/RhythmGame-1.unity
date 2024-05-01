@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 1487721940}
   - component: {fileID: 1487721941}
   - component: {fileID: 1487721942}
+  - component: {fileID: 1487721943}
   m_Layer: 0
   m_Name: RhythmManagerOne
   m_TagString: Untagged
@@ -228,7 +229,7 @@ MonoBehaviour:
   musicEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: aeaaa2a3f6d7d7f488e2c0023d0959d8, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 99ad979c6748da34ba9ca4db417befa1, type: 2}
   beatDuration: 0
   barDuration: 0
   durationSet: 0
@@ -250,6 +251,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc81223097d1a41df8a4d0e4cf716a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1487721943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487721939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34fb7391921d4548829ae797ee744f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d2f18596802ca1546aef96d90f363b65, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &1647138481
 GameObject:
   m_ObjectHideFlags: 0

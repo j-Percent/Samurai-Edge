@@ -27,8 +27,9 @@ public class RhythmManagerOne : MonoBehaviour {
     #endregion
 
     #region Setup
-    private void Start() {
-        playingID = musicEvent.Post(gameObject, (uint)(AkCallbackType.AK_MusicSyncAll | AkCallbackType.AK_EnableGetMusicPlayPosition | AkCallbackType.AK_MIDIEvent), CallbackFunction);
+    private void Start()
+    {
+        playingID = musicEvent.Post(gameObject, (uint)(AkCallbackType.AK_MusicSyncAll | AkCallbackType.AK_EnableGetMusicPlayPosition | AkCallbackType.AK_MusicSyncUserCue | AkCallbackType.AK_MIDIEvent), CallbackFunction);
     }
     #endregion
 
@@ -40,9 +41,9 @@ public class RhythmManagerOne : MonoBehaviour {
             musicInfo = (AkMusicSyncCallbackInfo)in_info;
             switch (in_type) {
 
-                //case AkCallbackType.AK_MusicSyncUserCue:
-                // YOU CAN IGNORE THIS FOR NOW, OR GIVE USER CUES A SHOT
-                //    break;
+                case AkCallbackType.AK_MusicSyncUserCue:
+                    ManageUserCue(musicInfo.userCueName);
+                    break;
 
                 case AkCallbackType.AK_MusicSyncBeat:
                     //HERE IS WHERE YOU CAN DO SOMETHING ON THE BEAT
@@ -62,6 +63,18 @@ public class RhythmManagerOne : MonoBehaviour {
                     durationSet = true;
                 }
             }
+        }
+    }
+    void ManageUserCue(string s)
+    {
+        switch (s)
+        {
+            case "A1":
+                Debug.Log("A1");
+                break;
+            case "A2":
+                Debug.Log("A2");
+                break;
         }
     }
 

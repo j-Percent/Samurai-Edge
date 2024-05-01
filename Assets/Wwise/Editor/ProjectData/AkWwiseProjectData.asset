@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: e3cc953c0e948f4c8b525bbef483e0c9
     GuidInternal: 
-    m_lastTime: -8584870068243181007
+    m_lastTime: -8584870056118751051
     List:
     - name: Main
       guid: 927fd19ba3d4f44785a1029f70ca4bd9
@@ -94,11 +94,11 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 65dc9147e1f0c5428472c4454f9ff073
     GuidInternal: 
-    m_lastTime: -8584870068243150958
+    m_lastTime: -8584870057239670409
     List:
-    - name: PlaySong
-      guid: 2f5a07f0ed37324aac6417f64819b277
-      id: 290606676
+    - name: PlayLoop
+      guid: 653224f02391614182464c768b6cfecc
+      id: 3673177585
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -106,13 +106,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 65dc9147e1f0c5428472c4454f9ff073
-      - ElementName: PlaySong
+      - ElementName: PlayLoop
         ObjectType: 3
-        guid: 2f5a07f0ed37324aac6417f64819b277
-      Path: Events\Default Work Unit\PlaySong
+        guid: 653224f02391614182464c768b6cfecc
+      Path: Events\Default Work Unit\PlayLoop
       maxAttenuation: 0
-      maxDuration: 1.8509524
-      minDuration: 1.8509524
+      maxDuration: 129.1827
+      minDuration: 129.1827
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
