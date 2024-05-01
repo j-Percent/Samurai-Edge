@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public int _defenseMeter;
+
+    public string _keyPressed;
+
     // Start is called before the first frame update
     void Start()
     {

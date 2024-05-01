@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4791DC65-F0E1-42C5-8472-C4454F9FF073}" SchemaVersion="119">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{4791DC65-F0E1-42C5-8472-C4454F9FF073}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="PlayLoop" ID="{F0243265-9123-4161-8246-4C768B6CFECC}">
+					<ChildrenList>
+						<Action Name="" ID="{59CDF6A7-CFF5-456E-9902-D4793A637EED}" ShortID="171645299">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Samurai Edge" ID="{8996AEA5-6437-43A5-8355-082B2C7F3D40}" WorkUnitID="{A67D22F2-E472-4E17-B52C-57E8EAE22B9A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

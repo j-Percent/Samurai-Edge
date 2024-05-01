@@ -74,12 +74,15 @@ public class RhythmManagerOne : MonoBehaviour {
         {
             case "A":
                 Debug.Log("Attack");
+                Enemy.GetComponent<Enemy>()._attack();
                 break;
             case "B":
                 Debug.Log("Block");
+                Enemy.GetComponent<Enemy>()._block();
                 break;
             case "W":
                 Debug.Log("Wait");
+                Enemy.GetComponent<Enemy>()._wait();
                 break;
         }
     }
