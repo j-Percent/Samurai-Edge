@@ -8,6 +8,9 @@ public class RhythmManagerOne : MonoBehaviour {
     [SerializeField] AK.Wwise.Event musicEvent;
     uint playingID;
 
+    public GameObject Player;
+    public GameObject Enemy;
+
     [SerializeField] float beatDuration;
     [SerializeField] float barDuration;
     [SerializeField] bool durationSet = false;
@@ -47,12 +50,12 @@ public class RhythmManagerOne : MonoBehaviour {
 
                 case AkCallbackType.AK_MusicSyncBeat:
                     //HERE IS WHERE YOU CAN DO SOMETHING ON THE BEAT
-                    OnTheBeat();
+                    //OnTheBeat();
                     break;
 
                 case AkCallbackType.AK_MusicSyncBar:
                     //HERE IS WHERE YOU CAN DO SOMETHING ON THE BAR
-                    OnTheBar();
+                    //OnTheBar();
                     break;
             }
 
@@ -69,11 +72,14 @@ public class RhythmManagerOne : MonoBehaviour {
     {
         switch (s)
         {
-            case "A1":
-                Debug.Log("A1");
+            case "A":
+                Debug.Log("Attack");
                 break;
-            case "A2":
-                Debug.Log("A2");
+            case "B":
+                Debug.Log("Block");
+                break;
+            case "W":
+                Debug.Log("Wait");
                 break;
         }
     }
