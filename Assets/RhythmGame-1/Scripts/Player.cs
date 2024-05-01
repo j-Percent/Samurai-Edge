@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     public int _defenseMax;
 
     public float _enemyAttackCountdown;
-    public float _enemyAttackWaitTime;
 
     public string _keyPressed;
 
@@ -38,7 +37,11 @@ public class Player : MonoBehaviour
         {
             if (_enemyAttackCountdown <= 0)
             {
-
+                Debug.Log("Player Hit!");
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Debug.Log("Successful Defense!");
             }
             _enemyAttackCountdown -= Time.deltaTime;
         }

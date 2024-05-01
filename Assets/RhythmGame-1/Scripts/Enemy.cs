@@ -11,32 +11,26 @@ public class Enemy : MonoBehaviour
     public int _defenseMeter;
     public int _defenseMax;
 
-    public float _attackCountdown;
-    public float _attackWaitTime;
+    public float _enemyAttackWaitTime;
 
     // Start is called before the first frame update
     void Start()
     {
         _distance = 0;
         _defenseMeter = 0;
+        _enemyAttackWaitTime = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_attackCountdown >= 0)
-        {
-            _attackCountdown -= Time.deltaTime;
-            if (_attackCountdown <= 0)
-            {
 
-            }
-        }
     }
 
     public void _attack()
     {
         Debug.Log("Attack");
+        Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
     }
     public void _block()
     {
