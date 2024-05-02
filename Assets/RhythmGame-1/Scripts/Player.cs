@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     public GameObject Enemy;
 
+    public float _position;
     public int _defenseMeter;
     public int _defenseMax;
 
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _position = 0;
         _defenseMeter = 0;
         _enemyAttackCountdown = -1;
     }
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         _cd -= Time.deltaTime;
 
         if(_cd <= 0) {
@@ -37,11 +39,14 @@ public class Player : MonoBehaviour
 
                 if (_enemyAttackCountdown >= 0)
                 {
-                    //Debug.Log("Enemy Counterattack!"); 
+                    //Debug.Log("Enemy Counterattack!");
+                    _position -= 1;
+                    _defenseMeter += 30;
                 }
                 else if (Enemy.GetComponent<Enemy>()._blocking >= 0)
                 {
                     _defenseMeter += 30;
+                    _position -= 0.5f;
                    // Debug.Log("Enemy Blocked!");
                 }
                 else
