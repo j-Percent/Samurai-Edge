@@ -13,38 +13,44 @@ public class Enemy : MonoBehaviour
 
     public float _enemyAttackWaitTime;
 
-    public bool _blocking;
+    public float _blocking;
+
+    float _cd = 6 / 19f;
 
     // Start is called before the first frame update
     void Start()
     {
         _distance = 0;
         _defenseMeter = 0;
-        _enemyAttackWaitTime = 1.0f;
-        _blocking = false;
+        _enemyAttackWaitTime = 6/19;
+        _blocking = -1f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(_blocking >= -1)
+        _blocking -= Time.deltaTime;
     }
 
     public void _attack()
     {
-        Debug.Log("Enemy Attack");
+        //Debug.Log("Enemy Attack");
         Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
     }
     public void _block()
     {
         //Debug.Log("Enemy Block");
-        _blocking = true;
+        _blocking = _cd;
     }
-    public void _blockEnd()
-    {
-        //Debug.Log("Enemy Block End");
-        _blocking = false;
-    }
+
+    //public void _blockEnd()
+    //{
+    //    //Debug.Log("Enemy Block End");
+    //    _blocking = false;
+    //}
+
     public void _wait()
     {
         //Debug.Log("Enemy Wait");

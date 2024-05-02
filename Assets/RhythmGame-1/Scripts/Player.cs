@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
 
     public string _keyPressed;
 
+    public float _beat = 6/19f;
+    public float _cd;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,41 +27,54 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //Debug.Log("Player Attack");
 
-            if (_enemyAttackCountdown >= 0)
+        _cd -= Time.deltaTime;
+
+        if(_cd <= 0) {
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("Enemy Counterattack!"); 
+                //Debug.Log("Player Attack");
+
+                if (_enemyAttackCountdown >= 0)
+                {
+                    //Debug.Log("Enemy Counterattack!"); 
+                }
+                else if (Enemy.GetComponent<Enemy>()._blocking >= 0)
+                {
+                    _defenseMeter += 30;
+                   // Debug.Log("Enemy Blocked!");
+                }
+                else
+                {
+                    //Debug.Log("Successful Hit!");
+                }
+                _cd = _beat;
             }
-            else if (Enemy.GetComponent<Enemy>()._blocking == true)
+
+            else if (Input.GetKeyDown(KeyCode.J))
             {
-                Debug.Log("Enemy Blocked!");
-            }
-            else
-            {
-                Debug.Log("Successful Hit!");
+                Debug.Log("Player Defend");
+                if(_enemyAttackCountdown >= 0)
+                {
+                    Debug.Log("Successful Defense!");
+                    _enemyAttackCountdown = -1;
+                }
+                _cd = _beat;
+
             }
         }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            //Debug.Log("Player Defend");
-        }
-
 
         if (_enemyAttackCountdown >= 0)
         {
             _enemyAttackCountdown -= Time.deltaTime;
             if (_enemyAttackCountdown <= 0)
             {
-                Debug.Log("Player Hit!");
+               // Debug.Log("Player Hit!");
             }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                Debug.Log("Successful Defense!");
-                _enemyAttackCountdown = -1;
-            }
+            _cd = _beat;
         }
+
+
+
     }
 }
