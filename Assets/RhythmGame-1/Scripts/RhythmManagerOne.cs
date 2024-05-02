@@ -55,7 +55,7 @@ public class RhythmManagerOne : MonoBehaviour {
 
                 case AkCallbackType.AK_MusicSyncBar:
                     //HERE IS WHERE YOU CAN DO SOMETHING ON THE BAR
-                    OnTheBar();
+                    //OnTheBar();
                     break;
             }
 
@@ -72,16 +72,20 @@ public class RhythmManagerOne : MonoBehaviour {
     {
         switch (s)
         {
-            case "A":
-                Debug.Log("Attack");
+            case "a":
+                Debug.Log("Enemy Attack");
                 Enemy.GetComponent<Enemy>()._attack();
                 break;
-            case "B":
-                Debug.Log("Block");
+            case "b":
+                Debug.Log("Enemy Block");
                 Enemy.GetComponent<Enemy>()._block();
                 break;
-            case "W":
-                Debug.Log("Wait");
+            case "c":
+                Debug.Log("Enemy Block End");
+                Enemy.GetComponent<Enemy>()._blockEnd();
+                break;
+            case "w":
+                Debug.Log("Enemy Wait");
                 Enemy.GetComponent<Enemy>()._wait();
                 break;
         }
@@ -99,7 +103,6 @@ public class RhythmManagerOne : MonoBehaviour {
     /// </summary>
     void OnTheBar() {
         Debug.Log("Here is a bar event!");
-        Enemy.GetComponent<Enemy>()._attack();
     }
 
 

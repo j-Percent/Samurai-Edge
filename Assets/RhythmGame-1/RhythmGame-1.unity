@@ -152,6 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b0335ca84df464ebc82d6ac96b1c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemy: {fileID: 246104978}
+  _defenseMeter: 0
+  _defenseMax: 0
+  _enemyAttackCountdown: 0
+  _keyPressed: 
 --- !u!4 &15967507
 Transform:
   m_ObjectHideFlags: 0
@@ -196,6 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83aff3f6ee98f5c4f8b11128e56c7dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 15967505}
+  _distance: 0
+  _defenseMeter: 0
+  _defenseMax: 0
+  _enemyAttackWaitTime: 0
 --- !u!4 &246104980
 Transform:
   m_ObjectHideFlags: 0
