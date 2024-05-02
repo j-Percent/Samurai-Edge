@@ -32,7 +32,12 @@ public class Player : MonoBehaviour
         
         _cd -= Time.deltaTime;
 
-        if(_cd <= 0) {
+        Vector3 newPosition = gameObject.transform.position; 
+        newPosition.x = _position;
+        gameObject.transform.position = newPosition; 
+
+
+        if (_cd <= 0) {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //Debug.Log("Player Attack");
@@ -47,10 +52,11 @@ public class Player : MonoBehaviour
                 {
                     _defenseMeter += 30;
                     _position -= 0.5f;
-                   // Debug.Log("Enemy Blocked!");
+                    Debug.Log("Enemy Blocked!");
                 }
                 else
                 {
+                    _position += 0.3f;
                     //Debug.Log("Successful Hit!");
                 }
                 _cd = _beat;
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.J))
             {
-                Debug.Log("Player Defend");
+               // Debug.Log("Player Defend");
                 if(_enemyAttackCountdown >= 0)
                 {
                     Debug.Log("Successful Defense!");
@@ -74,7 +80,8 @@ public class Player : MonoBehaviour
             _enemyAttackCountdown -= Time.deltaTime;
             if (_enemyAttackCountdown <= 0)
             {
-               // Debug.Log("Player Hit!");
+                // Debug.Log("Player Hit!");
+                _position -= 1;
             }
             _cd = _beat;
         }
