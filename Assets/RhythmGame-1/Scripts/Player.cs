@@ -49,10 +49,10 @@ public class Player : MonoBehaviour
                     _defenseMeter += 30;
                 }
                 else if (Enemy.GetComponent<Enemy>()._blocking >= 0)
-                {
+                {   
                     _defenseMeter += 30;
                     _position -= 0.5f;
-                    Debug.Log("Enemy Blocked!");
+                   // Debug.Log("Enemy Blocked!");
                 }
                 else
                 {
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
                // Debug.Log("Player Defend");
                 if(_enemyAttackCountdown >= 0)
                 {
-                    Debug.Log("Successful Defense!");
+                  //  Debug.Log("Successful Defense!");
                     _enemyAttackCountdown = -1;
                 }
                 _cd = _beat;
