@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject Player;
 
-    private Renderer renderer;
+    //private Renderer renderer;
 
     public int _distance;
     public int _defenseMeter;
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
 
         _distance = 0;
         _defenseMeter = 0;
@@ -56,6 +56,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Vector3 newPosition = gameObject.transform.position;
+        newPosition.x = Player.GetComponent<Player>()._position + 1.64f;
+        gameObject.transform.position = newPosition;
 
         Debug.Log(_defenseMeter);
         //Duration of enemy blocking
@@ -81,8 +85,8 @@ public class Enemy : MonoBehaviour
             _attackTime -= Time.deltaTime; 
             if (_attackTime <= 0)
             {
-                Player.GetComponent<Player>()._position -= 1f;
-                //_defenseMeter -= 30;
+                Player.GetComponent<Player>()._position -= 0.3f;
+                _defenseMeter -= 10;
             }
         }
 
@@ -94,7 +98,7 @@ public class Enemy : MonoBehaviour
             {
                 _defenseMeter = 0;
                 _cd = 1.5f;
-                renderer.material.color = new Color(0, 255, 0);
+                //renderer.material.color = new Color(0, 255, 0);
             }
 
             if (_defenseMeter <= 0)
@@ -118,7 +122,7 @@ public class Enemy : MonoBehaviour
             _attackCue.Post(gameObject);
             _attackTime = _beat;
 
-            renderer.material.color = new Color(255, 0, 0);
+            //renderer.material.color = new Color(255, 0, 0);
             _audio.clip = _attackSFX;
             _audio.Play();
         }
@@ -130,7 +134,7 @@ public class Enemy : MonoBehaviour
             _blockCue.Post(gameObject);
             _enemyBlockWarning = _beat;
 
-            renderer.material.color = new Color(0, 0, 255);
+           // renderer.material.color = new Color(0, 0, 255);
             _audio.clip = _defendSFX;
             _audio.Play();
         }
@@ -140,7 +144,7 @@ public class Enemy : MonoBehaviour
     {
         if (_cd <= 0)
         {
-            renderer.material.color = new Color(0, 255, 0);
+            //renderer.material.color = new Color(0, 255, 0);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Renderer renderer;
+    //private Renderer renderer;
 
     public GameObject Enemy;
 
@@ -19,10 +19,12 @@ public class Player : MonoBehaviour
     public float _beat = 6/19f;
     public float _cd;
 
+    public bool _breakdown = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
         _position = 0;
         _defenseMeter = 0;
         _defenseMax = 100;
@@ -32,16 +34,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
        // Debug.Log(_defenseMeter);
 
         _cd -= Time.deltaTime;
 
-        
-
         Vector3 newPosition = gameObject.transform.position; 
         newPosition.x = _position;
         gameObject.transform.position = newPosition; 
-
 
         if(_defenseMeter <= _defenseMax) { 
             if (_cd <= 0) {
@@ -52,19 +52,19 @@ public class Player : MonoBehaviour
                     if (_enemyAttackCountdown >= 0)
                     {
                         Debug.Log("Enemy Counterattack!");
-                        _position -= 1;
-                        _defenseMeter += 60;
+                        _position -= 0.3f;
+                        _defenseMeter += 50;
                     }
                     else if (Enemy.GetComponent<Enemy>()._enemyBlockingTime >= 0)
                     {   
-                        _defenseMeter += 30;
+                        _defenseMeter += 25;
                         _position -= 0.5f;
                         Debug.Log("Enemy Blocked!");
                     }
                     else
                     {
                         _defenseMeter -= 5;
-                        _position += 0.3f;
+                        _position += 0.1f;
                         Enemy.GetComponent<Enemy>()._defenseMeter += 10;
                         Debug.Log("Successful Hit!");
                     }
@@ -79,9 +79,10 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log("Successful Defense!");
                         Enemy.GetComponent<Enemy>()._attackTime = -1;
+                        Enemy.GetComponent<Enemy>()._defenseMeter += 10;
                         _position -= 0.1f;
-                        _defenseMeter += 30;
-                        Enemy.GetComponent<Enemy>()._defenseMeter += 20;
+                        _defenseMeter += 20;
+                        
                     }
                     _cd = _beat/2;
                     
@@ -106,12 +107,12 @@ public class Player : MonoBehaviour
         {
             _defenseMeter = 0;
             _cd = 1.5f;
-            renderer.material.color = new Color(255, 0, 0);
+            _breakdown = true;
         }
 
         if(_cd <= 0)
         {
-            renderer.material.color = new Color(255, 255, 255);
+            _breakdown = false;
         }
 
         if(_defenseMeter <= 0)
@@ -121,11 +122,11 @@ public class Player : MonoBehaviour
 
 
         #region end/win check
-        if (_position >= 7)
+        if (_position >= 2.75)
         {
             Debug.Log("Win");
         }
-        if (_position <= -7)
+        if (_position <= -2.75)
         {
             Debug.Log("Lose");
         }
