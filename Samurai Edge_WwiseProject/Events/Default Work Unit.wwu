@@ -14,6 +14,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="BlockCue" ID="{C3760A24-2DA0-445D-8609-30E3D06CFA65}">
+					<ChildrenList>
+						<Action Name="" ID="{F85C8F41-D0D0-4AB4-9CBF-B072ADEBB425}" ShortID="683996517">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Cymatics - Video Game Vocal 3" ID="{5A9C45DB-AC50-4726-8643-C40CEE411D1F}" WorkUnitID="{EDC103FE-7976-4847-AB5A-3EA0F7DEF87C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AttackCue" ID="{8B2DF2FC-55E2-4620-A6D0-D82F0873A6CD}">
+					<ChildrenList>
+						<Action Name="" ID="{2BAB8953-5ED2-4530-B3BF-DD0FAC9F4F34}" ShortID="1067340731">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Cymatics - Video Game Vocal 4" ID="{8A7F730A-6802-440F-9374-71F7EA25F6AA}" WorkUnitID="{EDC103FE-7976-4847-AB5A-3EA0F7DEF87C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

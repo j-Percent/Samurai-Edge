@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{EDC103FE-7976-4847-AB5A-3EA0F7DEF87C}" SchemaVersion="119">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{EDC103FE-7976-4847-AB5A-3EA0F7DEF87C}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{EDC103FE-7976-4847-AB5A-3EA0F7DEF87C}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Cymatics - Video Game Vocal 3" ID="{5A9C45DB-AC50-4726-8643-C40CEE411D1F}" ShortID="680266052">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8D6682C6-9397-46F6-A0B9-E3E95D22A2D5}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C9E84513-CCF2-4C67-A189-F9E2ACBCA391}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Cymatics - Video Game Vocal 3" ID="{2EAB8BD3-4A0A-42C8-A883-9E757A257052}">
+							<Language>SFX</Language>
+							<AudioFile>Cymatics - Video Game Vocal 3.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="177688618"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Cymatics - Video Game Vocal 3" ID="{2EAB8BD3-4A0A-42C8-A883-9E757A257052}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Cymatics - Video Game Vocal 4" ID="{8A7F730A-6802-440F-9374-71F7EA25F6AA}" ShortID="930227202">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8D6682C6-9397-46F6-A0B9-E3E95D22A2D5}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C9E84513-CCF2-4C67-A189-F9E2ACBCA391}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Cymatics - Video Game Vocal 4" ID="{C5A3C5BA-45F1-4FE0-AE6A-1A5B8F7E49DB}">
+							<Language>SFX</Language>
+							<AudioFile>Cymatics - Video Game Vocal 4.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="658572971"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Cymatics - Video Game Vocal 4" ID="{C5A3C5BA-45F1-4FE0-AE6A-1A5B8F7E49DB}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>
