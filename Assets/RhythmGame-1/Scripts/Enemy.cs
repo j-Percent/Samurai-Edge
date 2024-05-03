@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
+    public AK.Wwise.Event _attackCue;
+    public AK.Wwise.Event _blockCue;
 
     public GameObject Player;
 
@@ -21,6 +23,9 @@ public class Enemy : MonoBehaviour
 
     //Duration of a beat
     float _beat = 6 / 19f;
+
+    //Cooldown for breakdown
+    public float _cd = 0;
 
     //Countdown for duration of enemy to begin blocking
     public float _enemyBlockWarning = 0;
@@ -41,7 +46,8 @@ public class Enemy : MonoBehaviour
 
         _distance = 0;
         _defenseMeter = 0;
-        _enemyAttackWaitTime = 12/19;
+        _defenseMax = 100;
+        _enemyAttackWaitTime = 8/19;
         _enemyBlockingTime = -1f;
 
         _audio = GetComponent<AudioSource>();
@@ -50,23 +56,25 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(_defenseMeter);
         //Duration of enemy blocking
-        if (_enemyBlockingTime >= -1)
+        if (_enemyBlockingTime >= 0)
         {
             _enemyBlockingTime -= Time.deltaTime;
         }
 
         //Incrementation of enemy block warning
-        if (_enemyBlockWarning >= -1)
+        if (_enemyBlockWarning >= 0)
         {
             _enemyBlockWarning -= Time.deltaTime;
+            //Enemy begins blocking
+            if (_enemyBlockWarning <= 0)
+            {
+                _enemyBlockingTime = _beat;
+            }
         }
-        //Enemy begins blocking
-        else if (_enemyBlockWarning <= 0)
-        {
-            _enemyBlockingTime = _beat;
-        }
-
+       
         //Incrementation of enemy attack
         if (_attackTime >= 0)
         {
@@ -74,30 +82,65 @@ public class Enemy : MonoBehaviour
             if (_attackTime <= 0)
             {
                 Player.GetComponent<Player>()._position -= 1f;
+                //_defenseMeter -= 30;
             }
         }
+
+
+
+
+    #region defense meter over 100, break down
+            if (_defenseMeter > _defenseMax)
+            {
+                _defenseMeter = 0;
+                _cd = 1.5f;
+                renderer.material.color = new Color(0, 255, 0);
+            }
+
+            if (_defenseMeter <= 0)
+            {
+                _defenseMeter = 0;
+            }
+
+            if (_cd >= 0)
+            {
+                _cd -= Time.deltaTime;
+            }
+    #endregion
+
+
     }
 
+    //All the _cd <= is for breakdown
     public void _attack()
     {
-        _attackTime = _beat;
+        if (_cd <= 0) {
+            _attackCue.Post(gameObject);
+            _attackTime = _beat;
 
-        renderer.material.color = new Color(255, 0, 0);
-        _audio.clip = _attackSFX;
-        _audio.Play();
+            renderer.material.color = new Color(255, 0, 0);
+            _audio.clip = _attackSFX;
+            _audio.Play();
+        }
     }
     public void _block()
     {
-        _enemyBlockWarning = _beat;
+        if (_cd <= 0)
+        {
+            _blockCue.Post(gameObject);
+            _enemyBlockWarning = _beat;
 
-        renderer.material.color = new Color(0, 0, 255);
-        _audio.clip = _defendSFX;
-        _audio.Play();
+            renderer.material.color = new Color(0, 0, 255);
+            _audio.clip = _defendSFX;
+            _audio.Play();
+        }
     }
 
     public void _wait()
     {
-        
-        renderer.material.color = new Color(0, 255, 0);
+        if (_cd <= 0)
+        {
+            renderer.material.color = new Color(0, 255, 0);
+        }
     }
 }

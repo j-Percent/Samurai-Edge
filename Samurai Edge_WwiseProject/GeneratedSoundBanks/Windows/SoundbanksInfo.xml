@@ -22,7 +22,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{7502A577-7B30-B021-057C-7B18D81124D6}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{128DE0AA-B52B-E34D-0EE1-584C73F76C55}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -50,7 +50,7 @@
 						<MediaRef Id="177688618"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3673177585" Name="PlayLoop" DurationType="OneShot" DurationMin="129.49771" DurationMax="129.49771">
+				<Event Id="3673177585" Name="PlayLoop" DurationType="OneShot" DurationMin="130.12889" DurationMax="130.12889">
 					<MediaRefs>
 						<MediaRef Id="992044755"/>
 					</MediaRefs>
@@ -58,5 +58,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{B94133EF-CADC-06AB-53BC-6D837407C8D2}</FileHash>
+	<FileHash>{4EBEF32E-83CE-1DAB-5C5D-E2C76FA53283}</FileHash>
 </SoundBanksInfo>
