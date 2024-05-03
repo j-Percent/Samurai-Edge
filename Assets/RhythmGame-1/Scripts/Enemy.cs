@@ -39,6 +39,15 @@ public class Enemy : MonoBehaviour
     public AudioClip _attackSFX;
     public AudioClip _defendSFX;
 
+    //Sprites
+    public Sprite _enemyStatic;
+    public Sprite _enemyAttackCue;
+    public Sprite _enemyAttack;
+    public Sprite _enemyDefendCue;
+    public Sprite _enemyDefend;
+    public Sprite _enemyBlocked;
+    public Sprite _enemyHit;
+
     // Start is called before the first frame update
     void Start()
     {

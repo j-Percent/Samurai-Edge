@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
 
     public bool _breakdown = false;
 
+    public Sprite _plStatic;
+    public Sprite _plAttack;
+    public Sprite _plDefend;
+    public Sprite _plBlocked;
+    public Sprite _plHit;
+
     // Start is called before the first frame update
     void Start()
     {
