@@ -2,5 +2,5 @@ Event	ID	Name			Wwise Object Path	Notes
 	3673177585	PlayLoop			\Default Work Unit\PlayLoop	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	992044755	Samurai Edge	Y:\Samurai-Edge\Samurai Edge_WwiseProject\.cache\Windows\SFX\Samurai Edge_FBC78EF0.wem		\Interactive Music Hierarchy\Default Work Unit\Samurai Edge\Samurai Edge		22787972
+	992044755	Samurai Edge	C:\Users\ROG Strix\Intermediate Game Dev - Unity Projects\Samurai Edge\Samurai Edge_WwiseProject\.cache\Windows\SFX\Samurai Edge_FBC78EF0.wem		\Interactive Music Hierarchy\Default Work Unit\Samurai Edge\Samurai Edge		22787972
 

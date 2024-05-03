@@ -60,7 +60,7 @@
 																	<PropertyList>
 																		<Property Name="EndTrimOffset" Type="Real64" Value="129182.698412698"/>
 																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																		<Property Name="PlayAt" Type="Real64" Value="367.377361833627"/>
+																		<Property Name="PlayAt" Type="Real64" Value="315.021736323524"/>
 																	</PropertyList>
 																	<AudioSourceRef Name="Samurai Edge" ID="{CA0D9B63-EB84-4C26-8956-3FF74F71D1A5}"/>
 																</MusicClip>

@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(_enemyAttackCountdown);
         _cd -= Time.deltaTime;
 
         Vector3 newPosition = gameObject.transform.position; 
@@ -37,14 +37,14 @@ public class Player : MonoBehaviour
         gameObject.transform.position = newPosition; 
 
 
-        if (_cd <= 0) {
+        //if (_cd <= 0) {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //Debug.Log("Player Attack");
 
                 if (_enemyAttackCountdown >= 0)
                 {
-                    //Debug.Log("Enemy Counterattack!");
+                    Debug.Log("Enemy Counterattack!");
                     _position -= 1;
                     _defenseMeter += 30;
                 }
@@ -52,14 +52,14 @@ public class Player : MonoBehaviour
                 {   
                     _defenseMeter += 30;
                     _position -= 0.5f;
-                   // Debug.Log("Enemy Blocked!");
+                    Debug.Log("Enemy Blocked!");
                 }
                 else
                 {
                     _position += 0.3f;
-                    //Debug.Log("Successful Hit!");
+                    Debug.Log("Successful Hit!");
                 }
-                _cd = _beat;
+                _cd = _beat/2;
             }
 
             else if (Input.GetKeyDown(KeyCode.J))
@@ -67,20 +67,21 @@ public class Player : MonoBehaviour
                // Debug.Log("Player Defend");
                 if(_enemyAttackCountdown >= 0)
                 {
-                  //  Debug.Log("Successful Defense!");
+                    Debug.Log("Successful Defense!");
                     _enemyAttackCountdown = -1;
                 }
-                _cd = _beat;
+                _cd = _beat/2;
 
             }
-        }
+        //}
 
         if (_enemyAttackCountdown >= 0)
         {
+            
             _enemyAttackCountdown -= Time.deltaTime;
             if (_enemyAttackCountdown <= 0)
             {
-                // Debug.Log("Player Hit!");
+                Debug.Log("Player Hit!");
                 _position -= 1;
             }
             _cd = _beat;

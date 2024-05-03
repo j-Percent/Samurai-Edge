@@ -73,16 +73,16 @@ public class RhythmManagerOne : MonoBehaviour {
         switch (s)
         {
             case "a":
-                Debug.Log("Enemy Attack");
+                //Debug.Log("Enemy Attack");
                 Enemy.GetComponent<Enemy>()._attack();
                 break;
             case "b":
-                Debug.Log("Enemy Block");
+                //Debug.Log("Enemy Block");
                 Enemy.GetComponent<Enemy>()._block();
                 break;
  
             case "w":
-                Debug.Log("Enemy Wait");
+                //Debug.Log("Enemy Wait");
                 Enemy.GetComponent<Enemy>()._wait();
                 break;
         }

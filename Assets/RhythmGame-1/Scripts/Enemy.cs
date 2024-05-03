@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 
     public GameObject Player;
 
+    private Renderer renderer;
+
     public int _distance;
     public int _defenseMeter;
     public int _defenseMax;
@@ -22,14 +24,22 @@ public class Enemy : MonoBehaviour
     public bool _a = false;
     public bool _b = false;
 
+    public AudioSource _audio;
+
+    public AudioClip _attackSFX;
+    public AudioClip _defendSFX;
+
     // Start is called before the first frame update
     void Start()
     {
+        renderer = GetComponent<Renderer>();
+
         _distance = 0;
         _defenseMeter = 0;
-        _enemyAttackWaitTime = 6/19;
+        _enemyAttackWaitTime = 12/19;
         _blocking = -1f;
 
+        _audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,16 +59,14 @@ public class Enemy : MonoBehaviour
         {
             if(_a == true)
             {
-                Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
                 _a = false;
-                Debug.Log("Enemy Attack");
+                //Debug.Log("Enemy Attack");
             }
             if (_b == true)
             {
-                Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
                 _blocking = _cd;
                 _b = false;
-                Debug.Log("Enemy Block");
+                //Debug.Log("Enemy Block");
             }
         }
 
@@ -68,21 +76,23 @@ public class Enemy : MonoBehaviour
     {
         _counter = _cd;
         _a = true;
+        Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
+        renderer.material.color = new Color(255, 0, 0);
+        _audio.clip = _attackSFX;
+        _audio.Play();
     }
     public void _block()
     {
         _counter = _cd;
         _b = true;
+        renderer.material.color = new Color(0, 0, 255);
+        _audio.clip = _defendSFX;
+        _audio.Play();
     }
-
-    //public void _blockEnd()
-    //{
-    //    //Debug.Log("Enemy Block End");
-    //    _blocking = false;
-    //}
 
     public void _wait()
     {
-        Debug.Log("Enemy Wait");
+        //Debug.Log("Enemy Wait");
+        renderer.material.color = new Color(0, 255, 0);
     }
 }
