@@ -65,9 +65,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Vector3 newPosition = gameObject.transform.position;
-        newPosition.x = Player.GetComponent<Player>()._position + 1.64f;
+        newPosition.x = Player.GetComponent<Player>()._position + 1f;
         gameObject.transform.position = newPosition;
 
         Debug.Log(_defenseMeter);
@@ -84,6 +83,7 @@ public class Enemy : MonoBehaviour
             //Enemy begins blocking
             if (_enemyBlockWarning <= 0)
             {
+                this.GetComponent<SpriteRenderer>().sprite = _enemyDefendCue;
                 _enemyBlockingTime = _beat;
             }
         }
@@ -91,9 +91,12 @@ public class Enemy : MonoBehaviour
         //Incrementation of enemy attack
         if (_attackTime >= 0)
         {
-            _attackTime -= Time.deltaTime; 
-            if (_attackTime <= 0)
+            this.GetComponent<SpriteRenderer>().sprite = _enemyAttackCue;
+            _attackTime -= Time.deltaTime;
+            if (_attackTime <= 0 && _attackTime > -1)
             {
+                this.GetComponent<SpriteRenderer>().sprite = _enemyAttack;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plHit;
                 Player.GetComponent<Player>()._position -= 0.3f;
                 _defenseMeter -= 10;
             }

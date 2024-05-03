@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     public bool _breakdown = false;
 
+    //Sprites
     public Sprite _plStatic;
     public Sprite _plAttack;
     public Sprite _plDefend;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         //renderer = GetComponent<Renderer>();
-        _position = 0;
+        _position = -0.5f;
         _defenseMeter = 0;
         _defenseMax = 100;
         _enemyAttackCountdown = -1;
@@ -40,8 +41,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-       // Debug.Log(_defenseMeter);
+        if (_cd < 0)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = _plStatic;
+        }
+        // Debug.Log(_defenseMeter);
 
         _cd -= Time.deltaTime;
 
@@ -52,20 +56,25 @@ public class Player : MonoBehaviour
         if(_defenseMeter <= _defenseMax) { 
             if (_cd <= 0) {
                 //Player Presses Attack
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0))
                 {
+                    this.GetComponent<SpriteRenderer>().sprite = _plAttack;
                     //Debug.Log("Player Attack");
                     if (_enemyAttackCountdown >= 0)
                     {
                         Debug.Log("Enemy Counterattack!");
+                        this.GetComponent<SpriteRenderer>().sprite = _plHit;
+                        Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
                         _position -= 0.3f;
                         _defenseMeter += 50;
                     }
                     else if (Enemy.GetComponent<Enemy>()._enemyBlockingTime >= 0)
                     {   
                         _defenseMeter += 25;
-                        _position -= 0.5f;
+                        _position += 0.05f;
                         Debug.Log("Enemy Blocked!");
+                        this.GetComponent<SpriteRenderer>().sprite = _plBlocked;
+                        Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyDefend;
                     }
                     else
                     {
@@ -73,20 +82,25 @@ public class Player : MonoBehaviour
                         _position += 0.1f;
                         Enemy.GetComponent<Enemy>()._defenseMeter += 10;
                         Debug.Log("Successful Hit!");
+                        this.GetComponent<SpriteRenderer>().sprite = _plAttack;
+                        Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyHit;
                     }
                     _cd = _beat;
                     
                 }
 
                 //Player Presses Defense
-                else if (Input.GetKeyDown(KeyCode.J))
+                else if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(1))
                 {
-                    if(Enemy.GetComponent<Enemy>()._attackTime >= 0)
+                    this.GetComponent<SpriteRenderer>().sprite = _plDefend;
+                    if (Enemy.GetComponent<Enemy>()._attackTime >= 0)
                     {
                         Debug.Log("Successful Defense!");
+                        this.GetComponent<SpriteRenderer>().sprite = _plDefend;
+                        Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyBlocked;
                         Enemy.GetComponent<Enemy>()._attackTime = -1;
                         Enemy.GetComponent<Enemy>()._defenseMeter += 10;
-                        _position -= 0.1f;
+                        _position -= 0.05f;
                         _defenseMeter += 20;
                         
                     }
@@ -125,7 +139,6 @@ public class Player : MonoBehaviour
         {
             _defenseMeter = 0;
         }
-
 
         #region end/win check
         if (_position >= 2.75)
