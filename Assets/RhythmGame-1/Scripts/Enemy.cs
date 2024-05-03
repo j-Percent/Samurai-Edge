@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     float _cd = 6 / 19f;
     public float _counter = 0;
 
-    public bool _a = false;
+    public float _a ;
     public bool _b = false;
 
     public AudioSource _audio;
@@ -55,18 +55,19 @@ public class Enemy : MonoBehaviour
             _counter -= Time.deltaTime;
         }
 
+        if(_a >= 0)
+        {
+            _a -= Time.deltaTime;
+        }
+
         if(_counter <= 0)
         {
-            if(_a == true)
-            {
-                _a = false;
-                //Debug.Log("Enemy Attack");
-            }
+            
             if (_b == true)
             {
                 _blocking = _cd;
                 _b = false;
-                //Debug.Log("Enemy Block");
+               
             }
         }
 
@@ -74,15 +75,17 @@ public class Enemy : MonoBehaviour
 
     public void _attack()
     {
-        _counter = _cd;
-        _a = true;
-        Player.GetComponent<Player>()._enemyAttackCountdown = _enemyAttackWaitTime;
+
+       
+        _a = _cd;
+
         renderer.material.color = new Color(255, 0, 0);
         _audio.clip = _attackSFX;
         _audio.Play();
     }
     public void _block()
     {
+        /
         _counter = _cd;
         _b = true;
         renderer.material.color = new Color(0, 0, 255);
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour
 
     public void _wait()
     {
-        //Debug.Log("Enemy Wait");
+        
         renderer.material.color = new Color(0, 255, 0);
     }
 }
