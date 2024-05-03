@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
                     else
                     {
                         _defenseMeter -= 5;
-                        _position += 0.1f;
+                        _position += 0.2f;
                         Enemy.GetComponent<Enemy>()._defenseMeter += 10;
                         Debug.Log("Successful Hit!");
                         this.GetComponent<SpriteRenderer>().sprite = _plAttack;

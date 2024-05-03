@@ -74,6 +74,10 @@ public class Enemy : MonoBehaviour
         if (_enemyBlockingTime >= 0)
         {
             _enemyBlockingTime -= Time.deltaTime;
+            if (_enemyBlockingTime <= 0)
+            {
+                this.GetComponent<SpriteRenderer>().sprite = _enemyStatic;
+            }
         }
 
         //Incrementation of enemy block warning
@@ -97,7 +101,7 @@ public class Enemy : MonoBehaviour
             {
                 this.GetComponent<SpriteRenderer>().sprite = _enemyAttack;
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plHit;
-                Player.GetComponent<Player>()._position -= 0.3f;
+                Player.GetComponent<Player>()._position -= 0.2f;
                 _defenseMeter -= 10;
             }
         }
@@ -156,7 +160,7 @@ public class Enemy : MonoBehaviour
     {
         if (_cd <= 0)
         {
-            //renderer.material.color = new Color(0, 255, 0);
+            this.GetComponent<SpriteRenderer>().sprite = _enemyStatic;
         }
     }
 }
