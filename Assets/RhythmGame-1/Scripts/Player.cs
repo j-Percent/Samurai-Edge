@@ -38,17 +38,17 @@ public class Player : MonoBehaviour
 
 
         if (_cd <= 0) {
+            //Player Presses Attack
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //Debug.Log("Player Attack");
-
                 if (_enemyAttackCountdown >= 0)
                 {
                     Debug.Log("Enemy Counterattack!");
                     _position -= 1;
                     _defenseMeter += 30;
                 }
-                else if (Enemy.GetComponent<Enemy>()._blocking >= 0)
+                else if (Enemy.GetComponent<Enemy>()._enemyBlockingTime >= 0)
                 {   
                     _defenseMeter += 30;
                     _position -= 0.5f;
@@ -62,11 +62,13 @@ public class Player : MonoBehaviour
                 _cd = _beat/2;
             }
 
+            //Player Presses Defense
             else if (Input.GetKeyDown(KeyCode.J))
             {
-                if(Enemy.GetComponent<Enemy>()._a >= 0)
+                if(Enemy.GetComponent<Enemy>()._attackTime >= 0)
                 {
-                    Enemy.GetComponent<Enemy>()._a = -1;
+                    Debug.Log("Successful Defense!");
+                    Enemy.GetComponent<Enemy>()._attackTime = -1;
                     _position += 1f;
                 }
 
@@ -74,10 +76,5 @@ public class Player : MonoBehaviour
 
             }
         }
-
-        
-
-
-
     }
 }

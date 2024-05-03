@@ -13,6 +13,8 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID ATTACKCUE = 1489233838U;
+        static const AkUniqueID BLOCKCUE = 3651935313U;
         static const AkUniqueID PLAYLOOP = 3673177585U;
     } // namespace EVENTS
 

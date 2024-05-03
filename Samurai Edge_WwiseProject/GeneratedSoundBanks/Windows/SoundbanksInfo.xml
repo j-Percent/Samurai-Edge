@@ -22,16 +22,34 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{0702A995-91A2-C077-3134-2E76A327FB29}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{7502A577-7B30-B021-057C-7B18D81124D6}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="177688618" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Cymatics - Video Game Vocal 3.wav</ShortName>
+					<CachePath>SFX/Cymatics - Video Game Vocal 3_818F3B66.wem</CachePath>
+				</File>
+				<File Id="658572971" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Cymatics - Video Game Vocal 4.wav</ShortName>
+					<CachePath>SFX/Cymatics - Video Game Vocal 4_818F3B66.wem</CachePath>
+				</File>
 				<File Id="992044755" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Samurai Edge.wav</ShortName>
 					<CachePath>SFX/Samurai Edge_FBC78EF0.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
+				<Event Id="1489233838" Name="AttackCue" DurationType="OneShot" DurationMin="0.3066213" DurationMax="0.3066213">
+					<MediaRefs>
+						<MediaRef Id="658572971"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3651935313" Name="BlockCue" DurationType="OneShot" DurationMin="0.31040817" DurationMax="0.31040817">
+					<MediaRefs>
+						<MediaRef Id="177688618"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3673177585" Name="PlayLoop" DurationType="OneShot" DurationMin="129.49771" DurationMax="129.49771">
 					<MediaRefs>
 						<MediaRef Id="992044755"/>
@@ -40,5 +58,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{87522717-5764-DB67-05DD-8EF0065E1EA8}</FileHash>
+	<FileHash>{B94133EF-CADC-06AB-53BC-6D837407C8D2}</FileHash>
 </SoundBanksInfo>

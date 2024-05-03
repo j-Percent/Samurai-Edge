@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,17 +14,21 @@ public class Enemy : MonoBehaviour
     public int _defenseMeter;
     public int _defenseMax;
 
+    //Duration of enemy attack
     public float _enemyAttackWaitTime;
-    
+    //Duration of enemy block
+    public float _enemyBlockingTime;
 
-    public float _blocking;
+    //Duration of a beat
+    float _beat = 6 / 19f;
 
-    float _cd = 6 / 19f;
-    public float _counter = 0;
+    //Countdown for duration of enemy to begin blocking
+    public float _enemyBlockWarning = 0;
 
-    public float _a ;
-    public bool _b = false;
+    //Countdown for duration of enemy attack for player to block
+    public float _attackTime;
 
+    //Audio Source for audio cues
     public AudioSource _audio;
 
     public AudioClip _attackSFX;
@@ -37,7 +42,7 @@ public class Enemy : MonoBehaviour
         _distance = 0;
         _defenseMeter = 0;
         _enemyAttackWaitTime = 12/19;
-        _blocking = -1f;
+        _enemyBlockingTime = -1f;
 
         _audio = GetComponent<AudioSource>();
     }
@@ -45,39 +50,37 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_blocking >= -1)
+        //Duration of enemy blocking
+        if (_enemyBlockingTime >= -1)
         {
-            _blocking -= Time.deltaTime;
+            _enemyBlockingTime -= Time.deltaTime;
         }
 
-        if (_counter >= -1)
+        //Incrementation of enemy block warning
+        if (_enemyBlockWarning >= -1)
         {
-            _counter -= Time.deltaTime;
+            _enemyBlockWarning -= Time.deltaTime;
+        }
+        //Enemy begins blocking
+        else if (_enemyBlockWarning <= 0)
+        {
+            _enemyBlockingTime = _beat;
         }
 
-        if(_a >= 0)
+        //Incrementation of enemy attack
+        if (_attackTime >= 0)
         {
-            _a -= Time.deltaTime;
-        }
-
-        if(_counter <= 0)
-        {
-            
-            if (_b == true)
+            _attackTime -= Time.deltaTime; 
+            if (_attackTime <= 0)
             {
-                _blocking = _cd;
-                _b = false;
-               
+                Player.GetComponent<Player>()._position -= 1f;
             }
         }
-
     }
 
     public void _attack()
     {
-
-       
-        _a = _cd;
+        _attackTime = _beat;
 
         renderer.material.color = new Color(255, 0, 0);
         _audio.clip = _attackSFX;
@@ -85,9 +88,8 @@ public class Enemy : MonoBehaviour
     }
     public void _block()
     {
-        /
-        _counter = _cd;
-        _b = true;
+        _enemyBlockWarning = _beat;
+
         renderer.material.color = new Color(0, 0, 255);
         _audio.clip = _defendSFX;
         _audio.Play();
