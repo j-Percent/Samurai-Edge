@@ -22,6 +22,7 @@ public class RhythmManagerOne : MonoBehaviour {
     public GameObject LeftSheath;
     public GameObject RightPrompt;
     public GameObject RightSheath;
+    public GameObject Countdown;
 
     [SerializeField] float beatDuration;
     [SerializeField] float barDuration;
@@ -225,6 +226,73 @@ public class RhythmManagerOne : MonoBehaviour {
                 _rightPromptDown = -5;
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
                 Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "reset":
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "fakeb":
+                Debug.Log("fakeblock");
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plDefend;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                Player.GetComponent<Player>()._xStart -= 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart -= 0.05f;
+                break;
+            case "faked":
+                Debug.Log("fakedeflect");
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plBlocked;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyBlocked;
+                Player.GetComponent<Player>()._xStart -= 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart -= 0.05f;
+                break;
+            case "fakea":
+                Debug.Log("fakeattack");
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyDefend;
+                Player.GetComponent<Player>()._xStart += 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart += 0.05f;
+                break;
+            case "fakedb":
+                Debug.Log("fakedeflectback");
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plBlocked;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyBlocked;
+                Player.GetComponent<Player>()._xStart += 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart += 0.05f;
+                break;
+            case "cross":
+                Debug.Log("cross swords");
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                break;
+            case "set3":
+                Debug.Log("3");
+                Countdown.GetComponent<Countdown>()._set3();
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                break;
+            case "set2":
+                Debug.Log("2");
+                Countdown.GetComponent<Countdown>()._set2();
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                break;
+            case "set1":
+                Debug.Log("1");
+                Countdown.GetComponent<Countdown>()._set1();
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                break;
+            case "set0":
+                Debug.Log("0");
+                Countdown.GetComponent<Countdown>()._set0();
+                break;
+            case "destroyCount":
+                Debug.Log("Destroy Countdown");
+                Countdown.GetComponent<Countdown>()._destroy();
+                break;
+            case "gameStart":
+                Debug.Log("GameStart");
+                Player.GetComponent<Player>()._gameStart = true;
                 break;
         }
     }
