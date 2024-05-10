@@ -11,9 +11,35 @@ public class RhythmManagerOne : MonoBehaviour {
     public GameObject Player;
     public GameObject Enemy;
 
+    public GameObject DoorLeft;
+    public GameObject DoorRight;
+    public GameObject Sun;
+    public GameObject Temple;
+    public GameObject DefenseMeter;
+    public GameObject PlayerDefense;
+    public GameObject EnemyDefense;
+    public GameObject LeftPrompt;
+    public GameObject LeftSheath;
+    public GameObject RightPrompt;
+    public GameObject RightSheath;
+
     [SerializeField] float beatDuration;
     [SerializeField] float barDuration;
     [SerializeField] bool durationSet = false;
+
+    public float _doorL;
+    public float _doorR;
+    public float _sun;
+    public float _temple;
+    public float _defenseMeter;
+    public float _defense;
+    public float _prompts;
+    public float _leftPromptDown;
+    public float _leftPromptAway;
+    public float _leftPromptSpeed;
+    public float _rightPromptDown;
+    public float _rightPromptAway;
+    public float _rightPromptSpeed;
 
 
     #region Additional Parameters
@@ -33,9 +59,39 @@ public class RhythmManagerOne : MonoBehaviour {
     private void Start()
     {
         playingID = musicEvent.Post(gameObject, (uint)(AkCallbackType.AK_MusicSyncAll | AkCallbackType.AK_EnableGetMusicPlayPosition | AkCallbackType.AK_MusicSyncUserCue | AkCallbackType.AK_MIDIEvent), CallbackFunction);
+        _sun = -10;
+        _temple = -6;
+        _defenseMeter = 3f;
+        _defense = 6.21f;
+        _prompts = 0;
+        _leftPromptDown = 5f;
+        _leftPromptAway = 0f;
+        _leftPromptSpeed = 0.006f;
+        _rightPromptDown = -5f;
+        _rightPromptAway = 0f;
+        _rightPromptSpeed = 0.006f;
     }
     #endregion
 
+    private void Update()
+    {
+        _lerpAll();
+    }
+
+    private void _lerpAll ()
+    {
+        DoorLeft.transform.position = Vector2.Lerp(DoorLeft.transform.position, new Vector2(_doorL, DoorLeft.transform.position.y), 0.003f);
+        DoorRight.transform.position = Vector2.Lerp(DoorRight.transform.position, new Vector2(_doorR, DoorRight.transform.position.y), 0.003f);
+        Sun.transform.position = Vector2.Lerp(Sun.transform.position, new Vector2(Sun.transform.position.x, _sun), 0.0008f);
+        Temple.transform.position = Vector2.Lerp(Temple.transform.position, new Vector2(Temple.transform.position.x, _temple), 0.006f);
+        DefenseMeter.transform.position = Vector2.Lerp(DefenseMeter.transform.position, new Vector2(DefenseMeter.transform.position.x, _defenseMeter), 0.006f);
+        PlayerDefense.transform.position = Vector2.Lerp(PlayerDefense.transform.position, new Vector2(PlayerDefense.transform.position.x, _defense), 0.006f);
+        EnemyDefense.transform.position = Vector2.Lerp(EnemyDefense.transform.position, new Vector2(EnemyDefense.transform.position.x, _defense), 0.006f);
+        LeftSheath.transform.position = Vector2.Lerp(LeftSheath.transform.position, new Vector2(_leftPromptAway, _leftPromptDown), _leftPromptSpeed);
+        LeftPrompt.transform.position = Vector2.Lerp(LeftPrompt.transform.position, new Vector2(-_leftPromptAway, _leftPromptDown), _leftPromptSpeed);
+        RightSheath.transform.position = Vector2.Lerp(RightSheath.transform.position, new Vector2(-_rightPromptAway, _rightPromptDown), _rightPromptSpeed);
+        RightPrompt.transform.position = Vector2.Lerp(RightPrompt.transform.position, new Vector2(_rightPromptAway, _rightPromptDown), _rightPromptSpeed);
+    }
 
     void CallbackFunction(object in_cookie, AkCallbackType in_type, AkCallbackInfo in_info) {
         AkMusicSyncCallbackInfo musicInfo;
@@ -80,10 +136,95 @@ public class RhythmManagerOne : MonoBehaviour {
                 //Debug.Log("Enemy Block");
                 Enemy.GetComponent<Enemy>()._block();
                 break;
- 
+
             case "w":
                 //Debug.Log("Enemy Wait");
                 Enemy.GetComponent<Enemy>()._wait();
+                break;
+            case "doors":
+                Debug.Log("Doors Open");
+                _doorL = -11;
+                _doorR = 11;
+                break;
+            case "sun":
+                Debug.Log("Sun");
+                _sun = 0;
+                break;
+            case "temple":
+                Debug.Log("Temple");
+                _temple = -1f;
+                break;
+            case "playerIntro":
+                Debug.Log("Player");
+                Player.GetComponent<Player>()._playerEnter = true;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                break;
+            case "enemyIntro":
+                Debug.Log("Enemy");
+                Enemy.GetComponent<Enemy>()._enemyEnter = true;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "attackPrompt":
+                Debug.Log("Attack Prompt Down");
+                _leftPromptDown = 0;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plAttack;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyHit;
+                Player.GetComponent<Player>()._xStart += 0.2f;
+                Enemy.GetComponent<Enemy>()._xStart += 0.2f;
+                break;
+            case "attackPromptOpen":
+                Debug.Log("Attack Prompt Open");
+                _leftPromptAway = 5;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "attackPromptSlow":
+                Debug.Log("Attack Prompt Slow");
+                _leftPromptSpeed = 0.0002f;
+                _leftPromptAway = 8;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plBlocked;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyDefend;
+                Player.GetComponent<Player>()._xStart += 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart += 0.05f;
+                break;
+            case "attackPromptAway":
+                Debug.Log("Attack Prompt Away");
+                _leftPromptSpeed = 0.006f;
+                _leftPromptAway = 0;
+                _leftPromptDown = 5;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "defensePrompt":
+                Debug.Log("Defense Prompt Down");
+                _rightPromptDown = 0;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plHit;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyAttack;
+                Player.GetComponent<Player>()._xStart -= 0.2f;
+                Enemy.GetComponent<Enemy>()._xStart -= 0.2f;
+                break;
+            case "defensePromptOpen":
+                Debug.Log("Defense Prompt Open");
+                _rightPromptAway = 5;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
+                break;
+            case "defensePromptSlow":
+                Debug.Log("Defense Prompt Slow");
+                _rightPromptSpeed = 0.0002f;
+                _rightPromptAway = 8;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plDefend;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyBlocked;
+                Player.GetComponent<Player>()._xStart -= 0.05f;
+                Enemy.GetComponent<Enemy>()._xStart -= 0.05f;
+                break;
+            case "defensePromptAway":
+                Debug.Log("Defense Prompt Away");
+                _rightPromptSpeed = 0.006f;
+                _rightPromptAway = 0;
+                _rightPromptDown = -5;
+                Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
+                Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
                 break;
         }
     }

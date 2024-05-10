@@ -7,10 +7,14 @@ public class Enemy : MonoBehaviour
 {
     public AK.Wwise.Event _attackCue;
     public AK.Wwise.Event _blockCue;
+    public bool _enemyEnter;
 
     public GameObject Player;
 
     //private Renderer renderer;
+
+    public float _xStart;
+    public float _yStart;
 
     public int _distance;
     public int _defenseMeter;
@@ -47,10 +51,16 @@ public class Enemy : MonoBehaviour
     public Sprite _enemyDefend;
     public Sprite _enemyBlocked;
     public Sprite _enemyHit;
+    public Sprite _enemyDefeat;
+    public Sprite _enemyDeath;
 
     // Start is called before the first frame update
     void Start()
     {
+        _enemyEnter = false;
+        _xStart = 0.5f;
+        _yStart = -0.695f;
+
         //renderer = GetComponent<Renderer>();
 
         _distance = 0;
@@ -65,11 +75,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Player.GetComponent<Player>()._gameStart && _enemyEnter)
+        {
+            this.transform.position = Vector2.Lerp(this.transform.position, new Vector2(_xStart, _yStart), 0.02f);
+        }
+
         Vector3 newPosition = gameObject.transform.position;
         newPosition.x = Player.GetComponent<Player>()._position + 1f;
-        gameObject.transform.position = newPosition;
+        if (Player.GetComponent<Player>()._gameStart)
+            gameObject.transform.position = Vector2.Lerp(this.transform.position, newPosition, 0.02f);
 
-        Debug.Log(_defenseMeter);
+        //Debug.Log(_defenseMeter);
         //Duration of enemy blocking
         if (_enemyBlockingTime >= 0)
         {
@@ -100,6 +116,7 @@ public class Enemy : MonoBehaviour
             if (_attackTime <= 0 && _attackTime > -1)
             {
                 this.GetComponent<SpriteRenderer>().sprite = _enemyAttack;
+                Player.GetComponent<Player>()._cd = _beat / 2;
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plHit;
                 Player.GetComponent<Player>()._position -= 0.2f;
                 _defenseMeter -= 10;
@@ -134,7 +151,7 @@ public class Enemy : MonoBehaviour
     //All the _cd <= is for breakdown
     public void _attack()
     {
-        if (_cd <= 0) {
+        if (_cd <= 0 && !Player.GetComponent<Player>()._gameOver) {
             _attackCue.Post(gameObject);
             _attackTime = _beat;
 
@@ -145,7 +162,7 @@ public class Enemy : MonoBehaviour
     }
     public void _block()
     {
-        if (_cd <= 0)
+        if (_cd <= 0 && !Player.GetComponent<Player>()._gameOver)
         {
             _blockCue.Post(gameObject);
             _enemyBlockWarning = _beat;
@@ -158,7 +175,7 @@ public class Enemy : MonoBehaviour
 
     public void _wait()
     {
-        if (_cd <= 0)
+        if (_cd <= 0 && !Player.GetComponent<Player>()._gameOver)
         {
             this.GetComponent<SpriteRenderer>().sprite = _enemyStatic;
         }
