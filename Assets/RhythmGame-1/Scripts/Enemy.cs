@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour
             if (_attackTime <= 0 && _attackTime > -1)
             {
                 this.GetComponent<SpriteRenderer>().sprite = _enemyAttack;
-                Player.GetComponent<Player>()._cd = _beat / 2;
+                Player.GetComponent<Player>()._cd = _beat;
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plHit;
                 Player.GetComponent<Player>()._position -= 0.2f;
                 _defenseMeter -= 10;

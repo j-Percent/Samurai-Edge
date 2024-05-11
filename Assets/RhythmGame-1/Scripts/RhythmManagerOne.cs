@@ -227,6 +227,11 @@ public class RhythmManagerOne : MonoBehaviour {
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
                 Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
                 break;
+            case "defenseMeter":
+                Debug.Log("Defense Meter Down");
+                _defenseMeter = 0.73f;
+                _defense = 4f;
+                break;
             case "reset":
                 Player.GetComponent<SpriteRenderer>().sprite = Player.GetComponent<Player>()._plStatic;
                 Enemy.GetComponent<SpriteRenderer>().sprite = Enemy.GetComponent<Enemy>()._enemyStatic;
@@ -293,6 +298,21 @@ public class RhythmManagerOne : MonoBehaviour {
             case "gameStart":
                 Debug.Log("GameStart");
                 Player.GetComponent<Player>()._gameStart = true;
+                break;
+            case "gameEnd":
+                Debug.Log("Game End");
+                if (Player.GetComponent<Player>()._gameOver != true)
+                {
+                    Player.GetComponent<Player>()._gameOver = true;
+                    if (Player.GetComponent<Player>()._position < 0.5)
+                    {
+                        Player.GetComponent<Player>()._lose = true;
+                    }
+                    else
+                    {
+                        Player.GetComponent<Player>()._win = true;
+                    }
+                }
                 break;
         }
     }
